@@ -8,7 +8,7 @@ const page = async () => {
     return (
         <>
             <section className="pink_container">
-                <h1 className="heading"></h1>
+                <h1 className="heading">Submit Your Startups</h1>
             </section>
             <StartupForm />
         </>

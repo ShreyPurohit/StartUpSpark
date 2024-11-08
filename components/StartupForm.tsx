@@ -80,11 +80,11 @@ const StartupForm = () => {
             <div>
                 <label htmlFor="description" className="startup-form_label">Description</label>
                 <Textarea id="description" name="description" className="startup-form_textarea" required placeholder="Startup Description" />
-                {errors.title && <p className="startup-form_error">{errors.title}</p>}
+                {errors.description && <p className="startup-form_error">{errors.description}</p>}
             </div>
             <div>
                 <label htmlFor="category" className="startup-form_label">Category</label>
-                <Input id="category" name="category" className="startup-form_input" required placeholder="Startup Category (Tech, Health, Education ...)" />
+                <Input id="category" name="category" className="startup-form_input" required placeholder="Startup Category (Tech, Health, Education...)" />
                 {errors.category && <p className="startup-form_error">{errors.category}</p>}
             </div>
             <div>
@@ -100,9 +100,9 @@ const StartupForm = () => {
                     id="pitch"
                     preview="edit"
                     height={300}
-                    style={{ borderRadius: 20, overflow: 'hidden' }}
-                    textareaProps={{ placeholder: "Briefly Explain Your Idea And What Problem It Solves" }}
-                    previewOptions={{ disallowedElements: ['style'] }}
+                    style={{ borderRadius: 20, overflow: "hidden" }}
+                    textareaProps={{ placeholder: "Briefly describe your idea and what problem it solves", }}
+                    previewOptions={{ disallowedElements: ["style"], }}
                 />
                 {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
             </div>
