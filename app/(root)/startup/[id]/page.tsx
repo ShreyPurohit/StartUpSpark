@@ -1,14 +1,14 @@
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard"
+import { Skeleton } from "@/components/ui/skeleton"
+import View from "@/components/View"
 import { formatDate } from "@/lib/utils"
 import { client } from "@/sanity/lib/client"
 import { PLAYLIST_BY_SLUG_QUERY, STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries"
+import markdownIt from 'markdown-it'
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import markdownIt from 'markdown-it'
 import { Suspense } from "react"
-import { Skeleton } from "@/components/ui/skeleton"
-import View from "@/components/View"
-import StartupCard, { StartupTypeCard } from "@/components/StartupCard"
 
 const md = markdownIt()
 
@@ -19,11 +19,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
     const [post, { select: editorPosts }] = await Promise.all([
         client.fetch(STARTUP_BY_ID_QUERY, { id }),
-        client.fetch(PLAYLIST_BY_SLUG_QUERY, {
+        client.fetch<any>(PLAYLIST_BY_SLUG_QUERY, {
             slug: "editors-picks",
         }),
     ]);
-    
+
     if (!post) return notFound();
     const parsedContetnt = md.render(post.pitch || '')
 

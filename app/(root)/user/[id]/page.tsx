@@ -24,9 +24,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                             {user.name}
                         </h3>
                     </div>
-                    <Image
-                        src={user.image}
-                        alt={user.name}
+                    <img
+                        src={user.image!}
+                        alt={user.name!}
                         width={220}
                         height={220}
                         className='profile_image'

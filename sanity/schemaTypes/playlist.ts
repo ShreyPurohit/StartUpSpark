@@ -13,7 +13,8 @@ export const playlist = defineType({
             name: "slug",
             type: "slug",
             options: {
-                source: 'title'
+                source: 'title',
+                maxLength: 100
             }
         }),
         defineField({
