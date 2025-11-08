@@ -5,12 +5,21 @@ import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [GitHub],
+  providers: [
+    GitHub({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!
+    })
+  ],
   callbacks: {
     async signIn({
       user: { name, email, image },
-      profile: { id, login, bio }
+      profile
     }) {
+      const id = (profile as any)?.id
+      const login = (profile as any)?.login
+      const bio = (profile as any)?.bio
+
       const existingUser = await client.withConfig({ useCdn: false }).fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
         id
       })
@@ -30,7 +39,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, account, profile }) {
       if (account && profile) {
         const user = await client.withConfig({ useCdn: false }).fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
-          id: profile.id
+          id: (profile as any)?.id
         })
         token.id = user?._id
       }
